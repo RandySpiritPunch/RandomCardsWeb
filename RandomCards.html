@@ -1,0 +1,98 @@
+<html>
+	<head>
+		<style>
+			span {
+				margin-left: 5px; 
+			}
+			img{
+				width: 75px; height:100px;
+			}
+		</style>
+	</head>	
+	<body onload="populateCards();randomizeCards();">
+		<center>
+			<div id="main"></div>
+			<input type="button" value="Reload Cards" onclick="randomizeCards();">
+		</center>
+		<script>		
+			var CARD_DECK = [];
+			var RANDOM_POSITIONS = [];
+			var MAIN_NODE = document.getElementById("main");
+			var CARD_TYPE = ["0","2","3","4","5","6","7","8","9","J","Q","K","A"];
+			var SUIT_TYPE = ["H","C","S","D"]
+			
+			function populateCards(){						
+				for(c in CARD_TYPE)
+					populateCardURL(c);		
+			}
+				function populateCardURL(c){
+					for(s in SUIT_TYPE)
+						CARD_DECK.push(createImgUrl(CARD_TYPE[c]+SUIT_TYPE[s]));
+				}
+					function createImgUrl(card){
+						return "http://deckofcardsapi.com/static/img/" +card+".png";
+					}
+			function randomizeCards(){
+				clearRandoms();
+				loadRandomNumbers();
+				setupHtml();			
+			}		
+				function clearRandoms(){
+					RANDOM_POSITIONS = [];
+					removeChildrenFromMainNode();
+				}
+					function removeChildrenFromMainNode(){					
+						while (MAIN_NODE.firstChild) {
+							MAIN_NODE.removeChild(MAIN_NODE.firstChild);
+						}
+					}
+				function loadRandomNumbers(){
+					while(isRandomsFull()){		
+						populateRandomPosition();
+					}
+				}
+					function isRandomsFull(){
+						return (RANDOM_POSITIONS.length < CARD_DECK.length);
+					
+					}
+					function populateRandomPosition(){						
+						var num = getRandomNumber();
+						if(!isDuplicate(num))
+							addRandomToList(num);						
+					}	
+						function getRandomNumber(){
+							return Math.floor(Math.random() * CARD_DECK.length);
+						}
+						function isDuplicate(num){
+							return (RANDOM_POSITIONS.indexOf(num) > -1);
+						}		
+						function addRandomToList(num){
+							RANDOM_POSITIONS.push(num);
+						}
+				function setupHtml(){
+					for(var position = 0; position<CARD_DECK.length; position++){
+						createSpanElement(position);					
+					}
+				}					
+					function createSpanElement(position){						
+						var v = getImageUrl(position);
+						var i = createImgTag(v);
+						var s = document.createElement("span");	
+						var id = "id"+position;
+						s.setAttribute("id",id);					
+						MAIN_NODE.appendChild(s);
+						populateImgTagInSpan(id,i);					
+					}
+						function getImageUrl(position){
+							return CARD_DECK[RANDOM_POSITIONS[position]];
+						}
+						function createImgTag(image){
+							return "<img src='"+image+"'>";
+						}
+						function populateImgTagInSpan(id,imgTag){
+							document.getElementById(id).innerHTML=imgTag;
+						}
+		</script>
+	</body>
+</html>
+	
