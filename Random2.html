@@ -1,0 +1,107 @@
+<html>
+        <head>
+                <style>
+                        span {
+                            margin-left: 5px; 
+                        }
+                        img{
+                            width: 75px; height:100px;
+                        }
+                </style>
+                <script src="Scripts/Deck.js"></script>
+                <script src="Scripts/StringBuilder.js"></script>
+                <script src="Scripts/URLBuilder.js"></script>
+                <script src="Scripts/Card.js"></script>
+                <script src="Scripts/ElementCreator.js"></script>
+                <script src="Scripts/RandomPositions.js"></script>
+                <script src="Scripts/main.js"></script>
+                <script src="Scripts/Attribute.js"></script>
+                <title>Not a Title</title>
+                <script>
+                    
+                    function HTMLCreator(){
+                        
+                        var body = document.body;
+                        var element;
+                        
+                        this.designate = function(elementName){
+                            element = document.createElement(elementName);
+                        };
+                        this.addAttribute = function(a){
+                            element.setAttribute(a.name, a.value);
+                        };
+                        this.create = function(){
+                            body.appendChild(element);
+                        };
+                    }
+                    
+                    window.onload = function(){
+                        
+                        function loadHTML(){
+                            var H = new HTMLCreator();
+                                    H.designate("div");
+                            var A = new Attribute();
+                                A.name = "id";
+                                A.value = "main";
+                            H.addAttribute(A);
+                            H.create();
+                        }
+                        var a = document.body;
+                        console.log(a);
+                        
+                        var H = new HTMLCreator();
+                                H.designate("div");
+                        var A = new Attribute();
+                            A.name = "id";
+                            A.value = "main";
+                        H.addAttribute(A);
+                        H.create();
+                        
+                        
+                        
+                                            
+                    };
+                    
+                    
+                    
+                </script>
+        </head>	
+	<body >
+            <!--<center>-->
+                    <!--<div id="main"></div>-->
+                    <input id="reload" type="button" value="Reload Cards">
+            <!--</center>-->
+		<script>
+//			var MAIN_NODE = document.getElementById("main");
+//                        var button = document.getElementById("reload");
+//                            button.addEventListener("click", randomizeCards);
+//                        
+//			function populateCards(){
+//                            Deck.form();
+//                        }              
+//			function randomizeCards(){
+//                            Deck.shuffle();
+//                            removeChildrenFromMainNode();
+//                            setupHtml();
+//			}
+//                        function removeChildrenFromMainNode(){					
+//                            while (MAIN_NODE.firstChild) {
+//                                    MAIN_NODE.removeChild(MAIN_NODE.firstChild);
+//                            }
+//                        }
+//                        function setupHtml(){ 
+//
+//                            for(var itemPosition in Deck.cards){
+//                                var card = Deck.cards[itemPosition];
+//                                var EC = new ElementCreator();
+//                                    EC.card = card;
+//                                    EC.spawnSpan();
+//                                    EC.addAttributes();
+//                                    EC.addSpan();
+//                                    EC.setHTML();
+//                            }
+//                        }		
+		</script>
+	</body>
+</html>
+	
